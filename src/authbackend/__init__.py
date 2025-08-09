@@ -1,3 +1,4 @@
-from .constants import *
-from .public.utils import *
-from .services.social_auth import *
+from authbackend.constants import *
+from authbackend.exceptions import *
+from authbackend.public.utils import *
+from authbackend.services.social_auth import *

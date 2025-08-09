@@ -1,9 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="auth-backend",  # Use hyphen if you want
+    name="auth-backend",
     version="0.1",
-    packages=find_packages(),  # No where="src"
+    package_dir={"": "src"},  # Tell setuptools where to find packages
+    packages=find_packages(where="src"),
     install_requires=["bcrypt", "PyJWT", "requests"],
     author="Ali Banijaber",
     description="Reusable JWT-based authentication package with Google and Facebook OAuth support",

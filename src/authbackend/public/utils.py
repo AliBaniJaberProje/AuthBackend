@@ -3,7 +3,7 @@ import bcrypt
 import jwt
 from typing import Optional
 
-from src.authbackend.constants import SECRET_KEY, REFRESH_SECRET_KEY, REFRESH_TOKEN_EXPIRE_DAYS, ACCESS_TOKEN_EXPIRE_MINUTES
+from authbackend.constants import SECRET_KEY, REFRESH_SECRET_KEY, REFRESH_TOKEN_EXPIRE_DAYS, ACCESS_TOKEN_EXPIRE_MINUTES
 
 
 def hash_password(password: str) -> str:

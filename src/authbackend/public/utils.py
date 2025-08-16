@@ -5,7 +5,7 @@ from typing import Optional
 
 from authbackend.constants import SECRET_KEY, REFRESH_SECRET_KEY, REFRESH_TOKEN_EXPIRE_DAYS, ACCESS_TOKEN_EXPIRE_MINUTES
 
-from authbackend.exceptions import ExpiredTokenError
+from authbackend.exceptions import ExpiredTokenError, InvalidTokenError
 
 
 def hash_password(password: str) -> str:

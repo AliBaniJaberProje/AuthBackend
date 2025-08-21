@@ -14,12 +14,12 @@ def hash_password(password: str) -> str:
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8"))
 
-def create_access_token(user_id: int, social_login: bool, email: str) -> str:
-    payload = {"user_id": user_id, "social_login":social_login, "email":email, "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)}
+def create_access_token(user_id: int, role:str, social_login: bool, email: str) -> str:
+    payload = {"user_id": user_id, "role":role, "social_login":social_login, "email":email, "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)}
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
-def create_refresh_token(user_id: int, social_login: bool, email: str) -> str:
-    payload = {"user_id": user_id, "social_login":social_login, "email":email, "exp": datetime.utcnow() + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)}
+def create_refresh_token(user_id: int, role:str, social_login: bool, email: str) -> str:
+    payload = {"user_id": user_id,"role": role, "social_login":social_login, "email":email, "exp": datetime.utcnow() + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)}
     return jwt.encode(payload, REFRESH_SECRET_KEY, algorithm="HS256")
 
 def decode_access_token(token: str) -> Optional[dict]:
@@ -40,8 +40,8 @@ def decode_refresh_token(token: str) -> Optional[dict]:
     except jwt.InvalidTokenError:
         raise InvalidTokenError("Invalid token")
 
-def generate_token_pair(user_id: int, social_login: bool, email: str) -> dict:
+def generate_token_pair(user_id: int, role:str, social_login: bool, email: str) -> dict:
     return {
-        "access_token": create_access_token(user_id=user_id, social_login=social_login, email=email),
-        "refresh_token": create_refresh_token(user_id=user_id, social_login=social_login, email=email),
+        "access_token": create_access_token(user_id=user_id, role=role, social_login=social_login, email=email),
+        "refresh_token": create_refresh_token(user_id=user_id, role=role, social_login=social_login, email=email),
     }
